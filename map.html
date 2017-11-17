@@ -3,7 +3,7 @@
 	
 	.labels {
     margin-top:-3px;
-    padding: 5px;
+    padding: 7px;
     position: absolute;
     visibility: visible;
     z-index: 1030;
@@ -13,7 +13,7 @@
     border-right-color: rgba(0,0,0,0);
     border-bottom-color: rgba(0,0,0,0);
     border-left-color: rgba(0,0,0,0);
-    border-width: 5px 5px 0;
+    border-width: 7px 10px 0;
     bottom: 0;
     left: 50%;
     margin-left: -5px;
@@ -25,9 +25,10 @@
 .labels .inner{
     background-color: #000000;
     border-radius: 4px;
+	font-size:17px;
     color: #FFFFFF;
-    max-width: 400px;
-    padding: 3px 8px;
+    //max-width: 200px;
+    padding: 7px 7px;
     text-align: center;
     text-decoration: none;  
 }
@@ -76,7 +77,7 @@ var latLng = new google.maps.LatLng(45.9432, 24.9668),
 	invalidAddress = [];
 	colorsObj = {};
 	map = new google.maps.Map(document.getElementById('map_canvas'), {
-		zoom: 7,
+		zoom: 9,
 		center: latLng,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	});
@@ -88,8 +89,7 @@ var latLng = new google.maps.LatLng(45.9432, 24.9668),
 		colors.push("#" + ("000000" + color.toString(16)).slice(-6));
 	}*/
 	function random_rgba() {
-		var o = Math.round, r = Math.random, s = 100;
-		return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',1)';
+		return 'rgba(' +Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ',' +Math.floor(Math.random() * 255) + ',1)';
 	}
 	while (colors.length < 100) {
 		do {
@@ -153,12 +153,11 @@ function renderMarkers(address,labelContent,lastCount,labelColor,markerColor,sel
 						fontWeight: 'bold',
 						text: labelContent
 					},*/
-
-					 labelContent: "<div class='arrow'></div><div class='inner'>"+labelContent+"</div>",
-					//labelAnchor: new google.maps.Point(0, 0),
+					labelContent: "<div class='arrow' style='border-top-color: "+markerColor+";'></div><div class='inner' style='background-color:"+markerColor+"'>"+labelContent+"</div>",
+					labelAnchor: new google.maps.Point(0, 0),
 					labelClass: "labels",
 					labelInBackground: false,
-					icon:'aaa.png'
+					icon:"aa.png"
 					//icon: pinSymbol(markerColor)
 				});
 				var iw = new google.maps.InfoWindow({
@@ -191,9 +190,10 @@ function pinSymbol(color) {
   return {
     path: 'M 0,0 C -2,-20 -10,-22 -10,-30 A 10,10 0 1,1 10,-30 C 10,-22 2,-20 0,0 z',
     fillColor: color,
-    fillOpacity: 1,
+    fillOpacity: 0,
     strokeColor: '#000',
     strokeWeight: 2,
+	display: 'none',
     scale: 2
   };
 }
