@@ -46,6 +46,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBC9z8BAJqI5ocYHEMgawvbxhvrxxfLOdM&libraries=geometry,places&ext=.js"></script>
 <script src="https://cdn.rawgit.com/googlemaps/v3-utility-library/master/markerwithlabel/src/markerwithlabel.js"></script>
 </head>
+<p id="start" hidden><?php echo $_GET['start'] ?></p>
 <div id="map_canvas" style="height: 100%; width: 100%;"></div>
 <div class="modal fade bs-example-modal-lg tovwinvlddata" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
   <div class="modal-dialog modal-lg">  
@@ -99,9 +100,11 @@ var latLng = new google.maps.LatLng(45.9432, 24.9668),
 	}
 	
 function initMap() {
+	var start  = $("#start").text();
+	
 	$.ajax({
 		type: 'GET',
-		url: "http://floridaconstruct.eu/comenzi/test/testmap.php",
+		url: "http://floridaconstruct.eu/comenzi/programaripezi.php?start="+start,
 		dataType: 'json',
 		success: function(json) {
 			for (var i = 0; i < json.length; i++) {
